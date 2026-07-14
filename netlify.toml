@@ -3,10 +3,6 @@
   publish     = "dist"
   environment = { NODE_VERSION = "20" }
 
-[build.environment]
-  # Ensure production builds are deterministic
-  CI = "true"
-
 # SPA redirect — all routes serve index.html
 [[redirects]]
   from   = "/*"
