@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { translations } from "../constants/translations";
 
 // ---------------------------------------------------------------------------
@@ -6,6 +6,8 @@ import { translations } from "../constants/translations";
 // ---------------------------------------------------------------------------
 
 export const LangContext = createContext(null);
+
+const FADE_DURATION = 200; // ms
 
 // ---------------------------------------------------------------------------
 // Auto-detect helper
@@ -40,7 +42,8 @@ function detectLang() {
 // ---------------------------------------------------------------------------
 
 export function LangProvider({ children }) {
-  const [lang, setLang] = useState(() => detectLang());
+  const [lang,            setLang]            = useState(() => detectLang());
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Apply DOM side-effects whenever lang changes
   useEffect(() => {
@@ -53,8 +56,20 @@ export function LangProvider({ children }) {
     setLang((prev) => (prev === "en" ? "ar" : "en"));
   }
 
+  /**
+   * Fades the page out (200ms), switches lang, then fades back in.
+   * Consumers should read `isTransitioning` to apply the opacity.
+   */
+  const switchLang = useCallback(() => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setLang((prev) => (prev === "en" ? "ar" : "en"));
+      setTimeout(() => setIsTransitioning(false), FADE_DURATION);
+    }, FADE_DURATION);
+  }, []);
+
   return (
-    <LangContext.Provider value={{ lang, toggleLang }}>
+    <LangContext.Provider value={{ lang, toggleLang, switchLang, isTransitioning }}>
       {children}
     </LangContext.Provider>
   );
@@ -69,8 +84,8 @@ export function useLang() {
   if (!context) {
     throw new Error("useLang must be used within a LangProvider");
   }
-  const { lang, toggleLang } = context;
+  const { lang, toggleLang, switchLang, isTransitioning } = context;
   const t     = translations[lang];
   const isRTL = lang === "ar";
-  return { lang, toggleLang, t, isRTL };
+  return { lang, toggleLang, switchLang, isTransitioning, t, isRTL };
 }
