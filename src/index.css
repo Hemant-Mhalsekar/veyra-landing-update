@@ -1,1 +1,226 @@
+/* ── Google Fonts ── */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap");
+
 @import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════
+   CSS Custom Properties
+═══════════════════════════════════════════════════════════ */
+:root {
+  --color-bg:           #041f18;
+  --color-bg-mid:       #0a3d2f;
+  --color-bg-hero:      #135a3a;
+  --color-bg-hero-mid:  #1b6b4a;
+  --color-gold:         #d6c06f;
+  --color-gold-light:   #f6e6a1;
+  --color-gold-dark:    #bfa24a;
+  --color-text-muted:   #d9e7e2;
+  --color-text-subtle:  #cfe3dd;
+  --color-dark-text:    #052f24;
+  --gradient-gold:      linear-gradient(90deg, #f6e6a1, #d6c06f, #bfa24a);
+  --radius-sm:          10px;
+  --radius-md:          14px;
+  --radius-lg:          18px;
+  --radius-xl:          20px;
+  --ease-standard:      cubic-bezier(0.22, 1, 0.36, 1);
+  --scroll-progress:    0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Base Reset & Global Styles
+═══════════════════════════════════════════════════════════ */
+* {
+  margin:     0;
+  padding:    0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:  var(--color-bg);
+  color:       #ffffff;
+  overflow-x:  hidden;
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.rtl {
+  direction:      rtl;
+  font-family:    "Cairo", sans-serif;
+  letter-spacing: 0;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Utility Classes
+═══════════════════════════════════════════════════════════ */
+
+/* Gold gradient text */
+.gold-text {
+  background:             var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip:         text;
+}
+
+/* Gold animated underline */
+.gold-underline {
+  position: relative;
+}
+.gold-underline::after {
+  content:          "";
+  position:         absolute;
+  left:             0;
+  bottom:           -6px;
+  height:           3px;
+  width:            100%;
+  background:       var(--gradient-gold);
+  border-radius:    2px;
+  transform-origin: left center;
+  animation:        goldUnderline 0.6s ease forwards;
+}
+
+/* Input gold focus ring */
+.input-gold-focus:focus {
+  outline:    none;
+  box-shadow: 0 0 0 3px rgba(214, 192, 111, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Keyframe Animations
+═══════════════════════════════════════════════════════════ */
+
+/* Product bag float (async per-bag via animationDuration override) */
+@keyframes floatProduct {
+  0%, 100% { transform: translateY(0px);   }
+  50%       { transform: translateY(-12px); }
+}
+
+/* Synced float (used by hero product image) */
+@keyframes syncFloat {
+  0%, 100% { transform: translateY(0px);   }
+  50%       { transform: translateY(-14px); }
+}
+
+/* Hero float alias (used inline via heroFloat) */
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0px);   }
+  50%       { transform: translateY(-12px); }
+}
+
+/* Subtle video float */
+@keyframes videoFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.002);
+  }
+}
+
+/* CTA button gold glow breathing */
+@keyframes ctaPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0   0px rgba(214, 192, 111, 0.00),
+      0 6px 24px rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 20px 4px rgba(214, 192, 111, 0.35),
+      0 6px 24px rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* Underline draw animation */
+@keyframes goldUnderline {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Also used as growUnderline in Hero inline styles */
+@keyframes growUnderline {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Success dialog card pulse */
+@keyframes successPulse {
+  0%   { box-shadow: 0 0 0   0px rgba(19, 90, 58, 0.0);  }
+  40%  { box-shadow: 0 0 0  18px rgba(19, 90, 58, 0.35); }
+  100% { box-shadow: 0 0 0  24px rgba(19, 90, 58, 0.0);  }
+}
+
+/* Error card shake */
+@keyframes errorShake {
+  0%         { transform: translateX(0);   }
+  15%        { transform: translateX(-8px);}
+  30%        { transform: translateX( 8px);}
+  45%        { transform: translateX(-5px);}
+  60%        { transform: translateX( 5px);}
+  75%        { transform: translateX(-2px);}
+  100%       { transform: translateX(0);   }
+}
+
+/* Confetti particle fall */
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(120vh) rotate(720deg); opacity: 0; }
+}
+
+/* Email input focus glow burst */
+@keyframes emailGlow {
+  0%   { box-shadow: 0 0 0  0px rgba(214, 192, 111, 0.55); }
+  50%  { box-shadow: 0 0 0 6px rgba(214, 192, 111, 0.22); }
+  100% { box-shadow: 0 0 0 3px rgba(214, 192, 111, 0.15); }
+}
+
+/* Video border shimmer */
+@keyframes shimmerGold {
+  0%, 100% {
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.50),
+      0 0 0 1px rgba(214, 192, 111, 0.00);
+  }
+  50% {
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.50),
+      0 0 0 1.5px rgba(214, 192, 111, 0.22),
+      0 0 28px  4px rgba(214, 192, 111, 0.08);
+  }
+}
+
+/* WhatsApp button one-time entrance pulse */
+@keyframes whatsappPulse {
+  0%   { box-shadow: 0 0 0  0px  rgba(37, 211, 102, 0.0);  }
+  40%  { box-shadow: 0 0 0 16px  rgba(37, 211, 102, 0.28); }
+  100% { box-shadow: 0 0 0 20px  rgba(37, 211, 102, 0.0);  }
+}
+
+/* Waitlist / WhatsApp modal entrance ripple */
+@keyframes waEntrancePulse {
+  0%   { box-shadow: 0 0 0  0px  rgba(37, 211, 102, 0.0);  }
+  40%  { box-shadow: 0 0 0 16px  rgba(37, 211, 102, 0.28); }
+  100% { box-shadow: 0 0 0 20px  rgba(37, 211, 102, 0.0);  }
+}
+
+/* Ripple expand (CTA button click) */
+@keyframes rippleExpand {
+  to {
+    transform: translate(-50%, -50%) scale(40);
+    opacity:   0;
+  }
+}
