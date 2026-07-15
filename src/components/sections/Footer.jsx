@@ -38,15 +38,15 @@ export default function Footer() {
   return (
     <motion.footer
       ref={footerRef}
+      className="section-footer"
       initial={{ opacity: 0 }}
       animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
       style={{
-        background: "radial-gradient(circle at top, #0a3d2f 0%, #041f18 70%)",
-        padding:    "30px 8%",
-        fontSize:   "13px",
-        color:      "rgba(255,255,255,0.70)",
-        direction:  isRTL ? "rtl" : "ltr",
+        padding:   "30px 8%",
+        fontSize:  "13px",
+        color:     "rgba(255,255,255,0.70)",
+        direction: isRTL ? "rtl" : "ltr",
       }}
     >
       {/* Row 1 */}

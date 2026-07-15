@@ -90,10 +90,10 @@ export default function EarlyAccess({ onOpenWhatsApp }) {
     <section
       ref={sectionRef}
       id="early-access"
+      className="section-early"
       style={{
-        background: "radial-gradient(circle at top, #0a3d2f 0%, #041f18 70%)",
-        padding:    "6rem 1.5rem 5rem",
-        overflow:   "hidden",
+        padding:  "6rem 1.5rem 5rem",
+        overflow: "hidden",
       }}
     >
       <div
@@ -103,6 +103,29 @@ export default function EarlyAccess({ onOpenWhatsApp }) {
           textAlign: "center",
         }}
       >
+        {/* ── Badge ── */}
+        <motion.div
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={animState}
+          style={{
+            display:        "inline-flex",
+            alignItems:     "center",
+            gap:            "0.35rem",
+            padding:        "0.35rem 0.9rem",
+            marginBottom:   "1rem",
+            border:         "1px solid rgba(214,192,111,0.45)",
+            borderRadius:   "999px",
+            fontSize:       "0.78rem",
+            fontWeight:     600,
+            color:          "rgba(255,255,255,0.80)",
+            background:     "rgba(214,192,111,0.07)",
+            letterSpacing:  "0.03em",
+          }}
+        >
+          🔒 Limited First Batch
+        </motion.div>
+
         {/* ── 1. Heading ── */}
         <motion.h2
           variants={headingVariant}
@@ -301,14 +324,15 @@ export default function EarlyAccess({ onOpenWhatsApp }) {
             style={{
               flexShrink:    0,
               height:        "48px",
-              padding:       "0 1.25rem",
+              minWidth:      "180px",
+              padding:       "0 1.2rem",
               background:    submitting
                                ? "rgba(214,192,111,0.5)"
                                : "linear-gradient(135deg, #d6c06f, #bfa24a)",
               border:        "none",
               borderRadius:  "0.75rem",
               color:         "#0a1a10",
-              fontSize:      "0.9rem",
+              fontSize:      "0.88rem",
               fontWeight:    700,
               cursor:        submitting ? "not-allowed" : "pointer",
               whiteSpace:    "nowrap",
@@ -316,7 +340,7 @@ export default function EarlyAccess({ onOpenWhatsApp }) {
               opacity:       submitting ? 0.7 : 1,
             }}
           >
-            {submitting ? "…" : "→"}
+            {submitting ? "…" : "Get 10% Early Access →"}
           </button>
         </motion.form>
 
@@ -350,6 +374,21 @@ export default function EarlyAccess({ onOpenWhatsApp }) {
         >
           {t.trustText}
         </motion.p>
+
+        {/* Social proof line */}
+        <motion.p
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={animState}
+          style={{
+            margin:    "0.5rem 0 0",
+            fontSize:  "0.78rem",
+            color:     "rgba(255,255,255,0.40)",
+            textAlign: "center",
+          }}
+        >
+          Already 500+ people waiting. Spots are limited.
+        </motion.p>
       </div>
 
       {/* ── Dialogs ── */}
@@ -369,7 +408,8 @@ export default function EarlyAccess({ onOpenWhatsApp }) {
             flex-direction: column !important;
           }
           .email-form button {
-            width: 100%;
+            width:     100% !important;
+            min-width: 0   !important;
           }
         }
       `}</style>

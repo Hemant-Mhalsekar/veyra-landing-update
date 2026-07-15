@@ -144,7 +144,7 @@ export default function Hero({ onScrollToEarlyAccess }) {
           margin:                "0 auto",
           padding:               "6rem 1.5rem 4rem",
           display:               "grid",
-          gridTemplateColumns:   "1fr 1fr",
+          gridTemplateColumns:   "minmax(45%, 1fr) 1fr",
           gridTemplateAreas:     isRTL ? '"image text"' : '"text image"',
           gap:                   "3rem",
           alignItems:            "center",
@@ -180,7 +180,7 @@ export default function Hero({ onScrollToEarlyAccess }) {
                   {...fadeUp(titleDelays[i])}
                   style={{
                     display:    "block",
-                    fontSize:   "clamp(2rem, 4.5vw, 3.5rem)",
+                    fontSize:   "clamp(2.2rem, 3.5vw, 3.2rem)",
                     fontWeight: 800,
                     color:      "#fff",
                     letterSpacing: "-0.02em",
@@ -348,6 +348,19 @@ export default function Hero({ onScrollToEarlyAccess }) {
               </motion.li>
             ))}
           </ul>
+
+          {/* Trust line */}
+          <motion.p
+            {...fadeIn(1.35)}
+            style={{
+              marginTop:  "1rem",
+              fontSize:   "0.8rem",
+              color:      "rgba(255,255,255,0.50)",
+              textAlign:  isRTL ? "right" : "left",
+            }}
+          >
+            Join 500+ people already on the early access list.
+          </motion.p>
         </div>
 
         {/* ────────────── IMAGE column ────────────── */}

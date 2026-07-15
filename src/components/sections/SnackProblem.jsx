@@ -161,10 +161,10 @@ export default function SnackProblem() {
   return (
     <section
       ref={sectionRef}
+      className="section-problem"
       style={{
-        background: "radial-gradient(circle at top, #0a3d2f 0%, #041f18 70%)",
-        padding:    "6rem 1.5rem 5rem",
-        overflow:   "hidden",
+        padding:  "6rem 1.5rem 5rem",
+        overflow: "hidden",
       }}
     >
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>

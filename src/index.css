@@ -100,6 +100,48 @@ button {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   Section Backgrounds — distinct per section to prevent blur
+═══════════════════════════════════════════════════════════ */
+
+/* Gold hairline separator on every section except hero */
+.section-products,
+.section-problem,
+.section-usecases,
+.section-transform,
+.section-early,
+.section-footer {
+  border-top: 1px solid rgba(214, 192, 111, 0.08);
+}
+
+.section-hero {
+  /* Hero keeps its own inline radial-gradient — no override needed */
+}
+
+.section-products {
+  background: linear-gradient(180deg, #0d4a2e 0%, #0a3d2f 100%);
+}
+
+.section-problem {
+  background: linear-gradient(180deg, #062a1d 0%, #041f18 100%);
+}
+
+.section-usecases {
+  background: linear-gradient(180deg, #0d4a2e 0%, #0a3d2f 100%);
+}
+
+.section-transform {
+  background: linear-gradient(180deg, #041f18 0%, #062a1d 100%);
+}
+
+.section-early {
+  background: linear-gradient(180deg, #0a3d2f 0%, #0d4a2e 100%);
+}
+
+.section-footer {
+  background: #030f0a;
+}
+
+/* ═══════════════════════════════════════════════════════════
    Keyframe Animations
 ═══════════════════════════════════════════════════════════ */
 
