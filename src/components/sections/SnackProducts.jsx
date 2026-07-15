@@ -56,10 +56,10 @@ export default function SnackProducts() {
   return (
     <section
       ref={sectionRef}
+      className="section-products"
       style={{
-        background: "radial-gradient(circle at top, #0a3d2f 0%, #041f18 70%)",
-        padding:    "6rem 1.5rem 4rem",
-        overflow:   "hidden",
+        padding:  "6rem 1.5rem 4rem",
+        overflow: "hidden",
       }}
     >
       {/* ── Text block ── */}
@@ -67,7 +67,7 @@ export default function SnackProducts() {
         ref={textRef}
         style={{
           maxWidth:  "700px",
-          margin:    "0 auto 4rem",
+          margin:    "0 auto 2rem",
           textAlign: isRTL ? "right" : "center",
         }}
       >
@@ -153,7 +153,7 @@ export default function SnackProducts() {
           justifyContent: "center",
           alignItems:     "flex-end",
           flexWrap:       "wrap",
-          gap:            "clamp(1rem, 3vw, 2.5rem)",
+          gap:            "clamp(0.75rem, 2vw, 1.5rem)",
           maxWidth:       "1100px",
           margin:         "0 auto",
           direction:      "ltr", // product order never reverses in RTL
@@ -166,7 +166,11 @@ export default function SnackProducts() {
             whileHover={bagHover}
             transition={{ type: "spring", stiffness: 260, damping: 18 }}
             style={{
+              flexBasis:  "28%",
               flexShrink: 0,
+              flexGrow:   0,
+              display:    "flex",
+              justifyContent: "center",
               cursor:     "pointer",
               animation:  `productFloat ${product.floatDuration} ease-in-out ${i * 0.3}s infinite`,
               willChange: "transform",
@@ -177,23 +181,83 @@ export default function SnackProducts() {
               alt={product.name}
               loading="lazy"
               style={{
-                height:     "clamp(180px, 22vw, 300px)",
-                width:      "auto",
-                objectFit:  "contain",
-                filter:     "drop-shadow(0 16px 32px rgba(0,0,0,0.45))",
-                display:    "block",
+                height:    "clamp(200px, 22vw, 280px)",
+                width:     "auto",
+                maxWidth:  "100%",
+                objectFit: "contain",
+                filter:    "drop-shadow(0 20px 30px rgba(0,0,0,0.4))",
+                display:   "block",
               }}
             />
           </motion.div>
         ))}
       </motion.div>
 
+      {/* ── Stats divider ── */}
+      <div
+        aria-hidden
+        style={{
+          maxWidth:   "600px",
+          margin:     "3rem auto 0",
+          height:     "1px",
+          background: "linear-gradient(90deg, transparent 0%, rgba(214,192,111,0.30) 50%, transparent 100%)",
+        }}
+      />
+
+      {/* ── Stats row ── */}
+      <div
+        style={{
+          display:        "flex",
+          justifyContent: "center",
+          alignItems:     "center",
+          gap:            "3rem",
+          flexWrap:       "wrap",
+          maxWidth:       "700px",
+          margin:         "2rem auto 0",
+          direction:      "ltr",
+        }}
+      >
+        {[
+          { label: "100%", sub: "Real Fruit"   },
+          { label: "0g",   sub: "Added Sugar"  },
+          { label: "5",    sub: "Flavours"     },
+        ].map(({ label, sub }) => (
+          <div key={sub} style={{ textAlign: "center" }}>
+            <div
+              style={{
+                fontSize:             "2rem",
+                fontWeight:           800,
+                lineHeight:           1,
+                background:           "linear-gradient(135deg, #d6c06f, #f6e6a1, #bfa24a)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor:  "transparent",
+                backgroundClip:       "text",
+                marginBottom:         "0.25rem",
+              }}
+            >
+              {label}
+            </div>
+            <div
+              style={{
+                fontSize:   "0.78rem",
+                fontWeight: 500,
+                color:      "rgba(255,255,255,0.55)",
+                letterSpacing: "0.04em",
+                textTransform: "uppercase",
+              }}
+            >
+              {sub}
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* ── Gold divider ── */}
       <div
         aria-hidden
         style={{
           maxWidth: "700px",
-          margin:   "4rem auto 0",
+          margin:   "3rem auto 0",
           height:   "1px",
           background:
             "linear-gradient(90deg, transparent 0%, rgba(214,192,111,0.40) 50%, transparent 100%)",

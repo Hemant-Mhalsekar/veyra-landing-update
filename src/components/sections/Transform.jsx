@@ -36,10 +36,10 @@ export default function Transform() {
   return (
     <section
       ref={sectionRef}
+      className="section-transform"
       style={{
-        background: "radial-gradient(circle at top, #0a3d2f 0%, #041f18 70%)",
-        padding:    "6rem 1.5rem 5rem",
-        overflow:   "hidden",
+        padding:  "60px 1.5rem",
+        overflow: "hidden",
       }}
     >
       <div
@@ -52,8 +52,8 @@ export default function Transform() {
         {/* ── Heading ── */}
         <h2
           style={{
-            margin:        "0 0 2.75rem",
-            fontSize:      "clamp(1.5rem, 3.5vw, 2.25rem)",
+            margin:        "0 0 1.5rem",
+            fontSize:      "2rem",
             fontWeight:    800,
             letterSpacing: "-0.02em",
             lineHeight:    1.2,
@@ -95,7 +95,8 @@ export default function Transform() {
           animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
           transition={{ type: "spring", stiffness: 100, damping: 18, delay: 0.2 }}
           style={{
-            maxWidth: "720px",
+            width:  "90%",
+            maxWidth: "580px",
             margin:   "0 auto",
           }}
         >
@@ -110,11 +111,69 @@ export default function Transform() {
             style={{
               width:        "100%",
               display:      "block",
-              borderRadius: "20px",
+              borderRadius: "16px",
               boxShadow:    "0 30px 60px rgba(0,0,0,0.5)",
               animation:    "videoGlow 4s ease-in-out infinite",
             }}
           />
+        </motion.div>
+
+        {/* ── Context paragraph ── */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
+          style={{
+            maxWidth:   "480px",
+            margin:     "1.75rem auto 0",
+            fontSize:   "0.95rem",
+            lineHeight: 1.7,
+            color:      "rgba(255,255,255,0.70)",
+            textAlign:  "center",
+          }}
+        >
+          Freeze-drying removes moisture while locking in natural flavour, nutrients,
+          and crunch. No heat. No additives. Just fruit at its best.
+        </motion.p>
+
+        {/* ── Feature pills ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.7 }}
+          style={{
+            display:        "flex",
+            justifyContent: "center",
+            flexWrap:       "wrap",
+            gap:            "0.75rem",
+            marginTop:      "1.25rem",
+          }}
+        >
+          {[
+            { icon: "❄️", label: "Freeze-Dried"  },
+            { icon: "🍓", label: "100% Fruit"    },
+            { icon: "⚡",  label: "Stays Crunchy" },
+          ].map(({ icon, label }) => (
+            <span
+              key={label}
+              style={{
+                display:         "inline-flex",
+                alignItems:      "center",
+                gap:             "0.35rem",
+                padding:         "0.4rem 1rem",
+                background:      "rgba(10,61,47,0.65)",
+                border:          "1px solid rgba(214,192,111,0.30)",
+                borderRadius:    "999px",
+                fontSize:        "0.85rem",
+                color:           "#fff",
+                fontWeight:      500,
+                backdropFilter:  "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+              }}
+            >
+              {icon} {label}
+            </span>
+          ))}
         </motion.div>
 
         {/* ── Gold divider ── */}
